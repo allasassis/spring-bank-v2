@@ -29,7 +29,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoCliente> detalharCliente(@PathVariable long id) {
+    public ResponseEntity<DadosDetalhamentoCliente> detalharCliente(@PathVariable Long id) {
         Cliente cliente = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
     }
@@ -51,4 +51,13 @@ public class ClienteController {
         cliente.atualizarInformacoes(dados);
         return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarCliente(@PathVariable Long id) {
+        Cliente cliente = repository.findById(id).get();
+        repository.delete(cliente);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
