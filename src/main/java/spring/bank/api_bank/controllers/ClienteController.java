@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import spring.bank.api_bank.domain.dto.DadosAtualizarCliente;
 import spring.bank.api_bank.domain.dto.DadosCadastroCliente;
 import spring.bank.api_bank.domain.dto.DadosDetalhamentoCliente;
 import spring.bank.api_bank.domain.dto.DadosListagemCliente;
@@ -27,6 +28,12 @@ public class ClienteController {
         return ResponseEntity.ok(clientes);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoCliente> detalharCliente(@PathVariable long id) {
+        Cliente cliente = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoCliente> cadastroCliente(@RequestBody DadosCadastroCliente dados, UriComponentsBuilder uriB) {
@@ -35,5 +42,13 @@ public class ClienteController {
 
         URI uri = uriB.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoCliente(cliente));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoCliente> atualizarCliente(@RequestBody DadosAtualizarCliente dados, @PathVariable Long id) {
+        Cliente cliente = repository.getReferenceById(id);
+        cliente.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
     }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.bank.api_bank.domain.dto.DadosAtualizarCliente;
 import spring.bank.api_bank.domain.dto.DadosCadastroCliente;
 
 @Table(name = "clientes")
@@ -33,5 +34,20 @@ public class Cliente {
         email = dados.email();
         telefone = dados.telefone();
         endereco = new Endereco(dados.endereco());
+    }
+
+    public void atualizarInformacoes(DadosAtualizarCliente dados) {
+        if (dados.nome() != null) {
+            nome = dados.nome();
+        }
+        if (dados.email() != null) {
+            email = dados.email();
+        }
+        if (dados.telefone() != null) {
+            telefone = dados.telefone();
+        }
+        if (dados.endereco() != null) {
+            endereco.atualizarInformacoes(dados);
+        }
     }
 }
