@@ -4,6 +4,7 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import spring.bank.api_bank.domain.dto.DadosCadastroEndereco;
 
 @Embeddable
 @Getter
@@ -18,4 +19,14 @@ public class Endereco {
     private String cidade;
     private String cep;
     private String uf;
+
+    public Endereco(DadosCadastroEndereco dados) {
+        logradouro = dados.logradouro();
+        bairro = dados.bairro();
+        numero = dados.numero();
+        complemento = dados.complemento();
+        cidade = dados.cidade();
+        cep = dados.cep();
+        uf = dados.uf();
+    }
 }
