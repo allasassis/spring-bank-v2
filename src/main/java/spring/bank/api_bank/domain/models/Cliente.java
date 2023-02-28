@@ -24,6 +24,7 @@ public class Cliente {
     private String cpf;
     private String email;
     private String telefone;
+    private Double saldo;
 
     @Embedded
     private Endereco endereco;
@@ -48,6 +49,18 @@ public class Cliente {
         }
         if (dados.endereco() != null) {
             endereco.atualizarInformacoes(dados);
+        }
+    }
+
+    public void deposita(Double quantidade) {
+        saldo += quantidade;
+    }
+
+    public void sacar(Double quantidade) {
+        if (this.saldo >= quantidade) {
+            saldo -= quantidade;
+        } else {
+            throw new RuntimeException("Saldo é insuficiente para fazer o saque!");
         }
     }
 }
