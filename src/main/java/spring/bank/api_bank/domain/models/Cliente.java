@@ -60,7 +60,7 @@ public class Cliente {
         if (this.saldo >= quantidade) {
             saldo -= quantidade;
         } else {
-            throw new RuntimeException("Saldo é insuficiente para fazer o saque!");
+            throw new RuntimeException("Saldo é insuficiente para fazer o saque OU transferência. Operação cancelada!");
         }
     }
 }
