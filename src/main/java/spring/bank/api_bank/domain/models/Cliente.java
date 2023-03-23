@@ -24,7 +24,7 @@ public class Cliente {
     private String cpf;
     private String email;
     private String telefone;
-    private Double saldo;
+    private Double saldo = 0.0;
 
     @Embedded
     private Endereco endereco;

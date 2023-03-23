@@ -1,11 +1,9 @@
 package spring.bank.api_bank.domain.validators;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import spring.bank.api_bank.domain.dto.DadosOperacao;
 import spring.bank.api_bank.domain.models.Cliente;
 import spring.bank.api_bank.domain.models.Operacao;
-import spring.bank.api_bank.domain.repositories.ClienteRepository;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +13,7 @@ public class HorarioTransferenciaValidador implements Validator{
     @Override
     public void validar(DadosOperacao dados, Cliente cliente) {
         if (dados.operacao() == Operacao.SAQUE || dados.operacao() == Operacao.TRANSFERENCIA) {
-            LocalDateTime now = LocalDateTime.now().plusHours(8);
+            LocalDateTime now = LocalDateTime.now();
 
             Boolean antesDaAbertura = now.getHour() < 5;
             Boolean depoisDoEncerramento = now.getHour() > 21;

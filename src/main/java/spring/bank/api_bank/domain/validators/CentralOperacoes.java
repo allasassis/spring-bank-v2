@@ -7,6 +7,7 @@ import spring.bank.api_bank.domain.dto.DadosOperacao;
 import spring.bank.api_bank.domain.models.Cliente;
 import spring.bank.api_bank.domain.repositories.ClienteRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
