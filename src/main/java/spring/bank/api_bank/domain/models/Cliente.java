@@ -57,10 +57,16 @@ public class Cliente {
     }
 
     public void sacar(Double quantidade) {
-        if (this.saldo >= quantidade) {
-            saldo -= quantidade;
+
+        // taxa de saque e transferência -> 5%
+        Double taxa = quantidade * 0.05;
+        Double total = quantidade + taxa;
+
+        if (this.saldo >= total) {
+            saldo -= total;
         } else {
-            throw new RuntimeException("Saldo é insuficiente para fazer o saque OU transferência. Operação cancelada!");
+            throw new RuntimeException("Saldo é insuficiente para fazer o saque OU transferência." +
+                    " Operação cancelada! Lembrando que é cobrado uma taxa de 5% em saques e transferências");
         }
     }
 }
