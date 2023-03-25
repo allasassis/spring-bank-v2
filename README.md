@@ -35,6 +35,7 @@ Todas as funções usam DTO na entrada e saída de dados.
 - Spring Doc (Open API - Swagger)
 - Auth0 (Gerador de token JWT)
 - BCrypt Password Encoder
+- JUnit
 - Lombok
 
 ## Documentação
