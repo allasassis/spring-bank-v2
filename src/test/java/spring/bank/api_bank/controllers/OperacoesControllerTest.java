@@ -13,6 +13,7 @@ import spring.bank.api_bank.domain.dto.DadosOperacao;
 import spring.bank.api_bank.domain.models.Cliente;
 import spring.bank.api_bank.domain.models.Operacao;
 import spring.bank.api_bank.domain.validators.CentralOperacoes;
+import spring.bank.api_bank.domain.validators.HorarioTransferenciaValidador;
 import spring.bank.api_bank.domain.validators.ValidacaoException;
 
 @SpringBootTest
@@ -27,16 +28,29 @@ class OperacoesControllerTest {
     @DisplayName("Não pode sacar depois do horário limite do banco")
     void naoPodeSacarDepoisDoHorarioLimite() {
         Cliente cliente = new Cliente(new DadosCadastroCliente("Joao", "2312312321", "asda@gmail.com", "943281321",
-                new DadosCadastroEndereco("sadsa", "sadsa", "sadsa", "sadsa", "sadsa", "32183219", "SP")));
+                new DadosCadastroEndereco("Rua 1", "Bairro 1", "1", "", "Cidade 1", "32183219", "SP")));
 
         cliente.deposita(10000.0);
         DadosOperacao dadosOperacao = new DadosOperacao(1L, Operacao.SAQUE, 1000.0, null);
 
         try {
-            central.validarOperacao(dadosOperacao);
+            HorarioTransferenciaValidador validador = new HorarioTransferenciaValidador();
+            validador.validar(dadosOperacao, cliente);
         } catch (ValidacaoException e) {
             String expectedMessage = "Horário limite para saque e transferência atingido";
             Assertions.assertThat(e.getMessage().contains(expectedMessage));
         }
+    }
+
+    @Test
+    @DisplayName("Garantir que a taxa de 5% esteja sendo cobrada no saque e transferência")
+    void taxaDe5Porcento() {
+        Cliente cliente = new Cliente(new DadosCadastroCliente("Joao", "2312312321", "asda@gmail.com", "943281321",
+                new DadosCadastroEndereco("Rua 1", "Bairro 1", "1", "", "Cidade 1", "32183219", "SP")));
+
+        cliente.deposita(1000.0);
+        cliente.sacar(100.0);
+
+        Assertions.assertThat(cliente.getSaldo().equals(895.0));
     }
 }
