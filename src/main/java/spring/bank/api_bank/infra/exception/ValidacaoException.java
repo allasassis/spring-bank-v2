@@ -1,4 +1,4 @@
-package spring.bank.api_bank.domain.validators;
+package spring.bank.api_bank.infra.exception;
 
 import java.io.Serial;
 

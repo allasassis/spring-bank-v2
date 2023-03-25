@@ -3,7 +3,6 @@ package spring.bank.api_bank.controllers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -12,9 +11,8 @@ import spring.bank.api_bank.domain.dto.DadosCadastroEndereco;
 import spring.bank.api_bank.domain.dto.DadosOperacao;
 import spring.bank.api_bank.domain.models.Cliente;
 import spring.bank.api_bank.domain.models.Operacao;
-import spring.bank.api_bank.domain.validators.CentralOperacoes;
 import spring.bank.api_bank.domain.validators.HorarioTransferenciaValidador;
-import spring.bank.api_bank.domain.validators.ValidacaoException;
+import spring.bank.api_bank.infra.exception.ValidacaoException;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

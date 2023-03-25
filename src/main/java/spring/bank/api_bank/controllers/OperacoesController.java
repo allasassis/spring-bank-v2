@@ -1,5 +1,7 @@
 package spring.bank.api_bank.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import spring.bank.api_bank.domain.validators.CentralOperacoes;
 
 @RestController
 @RequestMapping("operacoes")
+@SecurityRequirement(name = "bearer-key")
 public class OperacoesController {
 
     @Autowired

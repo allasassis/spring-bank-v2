@@ -1,5 +1,6 @@
 package spring.bank.api_bank.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("clientes")
+@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
     @Autowired
