@@ -21,9 +21,6 @@ import spring.bank.api_bank.domain.validators.ValidacaoException;
 @ActiveProfiles("test")
 class OperacoesControllerTest {
 
-    @Autowired
-    private CentralOperacoes central;
-
     @Test
     @DisplayName("Não pode sacar depois do horário limite do banco")
     void naoPodeSacarDepoisDoHorarioLimite() {
@@ -31,7 +28,7 @@ class OperacoesControllerTest {
                 new DadosCadastroEndereco("Rua 1", "Bairro 1", "1", "", "Cidade 1", "32183219", "SP")));
 
         cliente.deposita(10000.0);
-        DadosOperacao dadosOperacao = new DadosOperacao(1L, Operacao.SAQUE, 1000.0, null);
+        DadosOperacao dadosOperacao = new DadosOperacao(null, Operacao.SAQUE, 1000.0, null);
 
         try {
             HorarioTransferenciaValidador validador = new HorarioTransferenciaValidador();
