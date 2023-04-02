@@ -18,7 +18,7 @@ public class CentralAutenticacao {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean validarECriptografar(DadosAutenticacao dadosAutenticacao) {
+    public Usuario validarECriptografar(DadosAutenticacao dadosAutenticacao) {
         UserDetails login = repository.findByLogin(dadosAutenticacao.login());
         if (login != null) {
             throw new ValidacaoException("Login já existe! Use outro nome de usuário, por favor!");
@@ -27,6 +27,6 @@ public class CentralAutenticacao {
         String senha = passwordEncoder.encode(dadosAutenticacao.senha());
         Usuario usuario = new Usuario(dadosAutenticacao.login(), senha);
         repository.save(usuario);
-        return true;
+        return usuario;
     }
 }
