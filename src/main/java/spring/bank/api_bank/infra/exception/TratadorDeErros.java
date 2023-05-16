@@ -20,7 +20,6 @@ public class TratadorDeErros {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro400(MethodArgumentNotValidException e) {
         List<FieldError> errors = e.getFieldErrors();
-
         return ResponseEntity.badRequest().body(errors.stream().map(DadosErroValidacao::new).toList());
     }
 
@@ -30,7 +29,6 @@ public class TratadorDeErros {
     }
 
     private record DadosErroValidacao(String campo, String mensagem) {
-
         public DadosErroValidacao(FieldError error) {
             this(error.getField(), error.getDefaultMessage());
         }
